@@ -1,0 +1,14 @@
+resources:
+  - ./ingress.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+patches:
+  - patch: |-
+      - op: add
+        path: /spec/tls
+        value: [{hosts: [host1.example.com], secretName: example} ]
+    target:
+      kind: Ingress
+      name: api
