@@ -1,0 +1,14 @@
+resources:
+  - ./ingress.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+patches:
+  - patch: |-
+      - op: add
+        path: /spec/rules/-
+        value: {"host":"host2.example.com","http":{"paths":[{"backend":{"service":{"name":"server","port":{"number":80}}}}]}}
+    target:
+      kind: Ingress
+      name: api
